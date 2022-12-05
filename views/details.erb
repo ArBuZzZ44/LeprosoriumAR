@@ -9,3 +9,19 @@
 <br />
 <h4>Comments:</h4>
 <br />
+<% @comments.each do |item| %>
+	<p>
+		<%= item['comment'] %>
+		<br />
+		<br />
+		<span style="font-size: 75%; color: #999;">At <%= item['created_date'] %></span>
+	</p>
+	<hr />
+<% end %>
+<p>
+	<form action="/details/<%= @post_id['id'] %>" method="POST" role="form">
+  		<textarea name="com[comment]" class="form-control" rows="6" placeholder="Type comment text here"></textarea>
+  		<br/>
+  		<button type="submit" class="btn btn-primary">Add comment</button>
+	</form>
+</p>
