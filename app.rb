@@ -52,7 +52,7 @@ post '/new' do
 end
 
 get '/details/:id' do
-	 # post_id = params[:id]
+	 @post_id = Post.find(params[:id])
 
 	 # results = @db.execute 'select * from Posts where id = ?', [post_id]
 	 # @row = results[0]
