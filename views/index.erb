@@ -1,13 +1,13 @@
 <h2>Latest posts:</h2>
 <br />
-<% @results.each do |post| %>
+<% @posts.each do |post| %>
 	<p>
-		<h4>Author: <%= post['username'] %></h4>
+		<h4>Author: <%= post['name'] %></h4>
 		<br />
 		<%= post['content'] %>
 		<br />
 		<br />
-		added at <%= post['created_date'] %>
+		added at <%= post['created_at'] %>
 		<br />
 		<br />
 		<a href="/details/<%= post['id'] %>">Comments</a>

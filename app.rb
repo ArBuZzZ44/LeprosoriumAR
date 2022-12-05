@@ -31,8 +31,8 @@ end
 # end
 
 get '/' do
-	#@results = @db.execute 'select * from Posts order by id desc'
-	erb "hello"
+	@posts = Post.order("created_at DESC")
+	erb :index
 end
 
 get '/new' do
