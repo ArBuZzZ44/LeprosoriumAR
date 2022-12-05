@@ -2,9 +2,9 @@
 <p>
 	<form action="/new" method="POST" role="form">
 		<label class="form-label">Who are you?</label>
-  		<input type="text" class="form-control" name="username" placeholder="Type your name" value="<%= @username %>">
+  		<input type="text" class="form-control" name="post[name]" placeholder="Type your name" value="<%= @p.name %>">
   		<br/>
-  		<textarea name="content" class="form-control" rows="6" placeholder="Type post text here" value="<%= @content %>"></textarea>
+  		<textarea name="post[content]" class="form-control" rows="6" placeholder="Type post text here" value="<%= @p.content %>"></textarea>
   		<br/>
   		<button type="submit" class="btn btn-primary">Submit</button>
 	</form>

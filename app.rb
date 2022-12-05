@@ -6,7 +6,9 @@ require 'sinatra/activerecord'
 
 set :database, {adapter: "sqlite3", database: "leprosorium.db"}
 
-class Post < ActiveRecord::Base 
+class Post < ActiveRecord::Base
+	validates :name, presence: true, length: {minimum: 3}
+	validates :content, presence: true  
 end
 
 
@@ -30,14 +32,22 @@ end
 
 get '/' do
 	#@results = @db.execute 'select * from Posts order by id desc'
-	erb :index
+	erb "hello"
 end
 
 get '/new' do
+	@p = Post.new
 	erb :new
 end
 
 post '/new' do
+	@p = Post.new params[:post]
+	if @p.save
+		redirect to '/'
+	else
+		@error = @p.errors.full_messages.first
+		erb :new
+	end
 	
 end
 
