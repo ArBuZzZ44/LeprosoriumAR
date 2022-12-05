@@ -13,26 +13,8 @@ class Post < ActiveRecord::Base
 end
 
 class Comment < ActiveRecord::Base 
+	validates :comment, presence: true
 end
-
-
-# configure do
-# 	init_db
-# 	@db.execute 'CREATE TABLE if not exists Posts 
-# 		(
-# 			id INTEGER PRIMARY KEY AUTOINCREMENT,
-# 			created_date DATE,
-# 			content TEXT,
-# 			username TEXT
-# 		)' 
-# 	@db.execute 'CREATE TABLE if not exists Comments 
-# 		(
-# 			id INTEGER PRIMARY KEY AUTOINCREMENT,
-# 			created_date DATE,
-# 			comment TEXT,
-# 			post_id INTEGER
-# 		)' 
-# end
 
 get '/' do
 	@posts = Post.order("created_at DESC")
@@ -56,26 +38,21 @@ post '/new' do
 end
 
 get '/details/:id' do
-	 @post_id = Post.find(params[:id])
+	@post = Post.find(params[:id])
+	@comments = @post.comments
+	@c = Comment.new
 
-	 @c = Comment.new params[:com]
-
-	 @comments = Comment.order("created_at DESC")
-
-	 erb :details
+	erb :details
 end
 
 post '/details/:id' do
-	# post_id = params[:id]
-	# @comment = params[:comment]
-
-	# if @comment.length <= 0
-	# 	@error = "Type comment"
-	# 	redirect to ('/details/' + post_id)
-	# end
-
-	# @db.execute 'insert into Comments (comment, created_date, post_id) values (?, datetime(), ?)', [@comment, post_id]
-
-	# redirect to ('/details/' + post_id)
+  	@c = Comment.new params[:comment]
+	
+	if @c.save
+		erb :details
+	else	
+		@error = @c.errors.full_messages.first
+		erb :details
+	end
 
 end

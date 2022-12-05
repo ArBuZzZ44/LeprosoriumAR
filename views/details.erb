@@ -1,26 +1,26 @@
 <h4>Post details:</h4>
 <br />
 <p>
-	<%= @post_id['content'] %>
+	<%= @post.content %>
 	<br />
 	<br />
-	added at <%= @post_id['created_at'] %>
+	added at <%= @post.created_at %>
 </p>
 <br />
 <h4>Comments:</h4>
 <br />
 <% @comments.each do |item| %>
 	<p>
-		<%= item['comment'] %>
+		<%= item.comment %>
 		<br />
 		<br />
-		<span style="font-size: 75%; color: #999;">At <%= item['created_date'] %></span>
+		<span style="font-size: 75%; color: #999;">At <%= item.created_date %></span>
 	</p>
 	<hr />
 <% end %>
 <p>
-	<form action="/details/<%= @post_id['id'] %>" method="POST" role="form">
-  		<textarea name="com[comment]" class="form-control" rows="6" placeholder="Type comment text here"></textarea>
+	<form action="/details/<%= @post.id %>" method="POST" role="form">
+  		<textarea name="comment[comment]" class="form-control" rows="6" placeholder="Type comment text here"></textarea>
   		<br/>
   		<button type="submit" class="btn btn-primary">Add comment</button>
 	</form>
